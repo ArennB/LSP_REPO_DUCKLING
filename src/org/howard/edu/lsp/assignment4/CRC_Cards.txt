@@ -15,7 +15,6 @@ Responsibilities:
 - Unpack and parse flight data
 - Store aircraft data in AircraftDatabase
 Collaborators:
-- AircraftTransponder
 - AircraftDatabase
 Assumptions:
 - Ground station is always online
@@ -29,10 +28,7 @@ Responsibilities:
 - Provide data for queries
 - Provide data for display updates
 Collaborators:
-- ATCGroundStation
-- DisplaySystem
-- DangerAnalyzer
-- ControllerInterface
+- None
 Assumptions:
 - Data is updated in real time
 - Supports efficient queries
@@ -69,7 +65,6 @@ Responsibilities:
 - Allow controller to query aircraft details
 - Display alerts and information to controller
 Collaborators:
-- AircraftDatabase
 - DangerAnalyzer
 Assumptions:
 - Controller can access all current data
