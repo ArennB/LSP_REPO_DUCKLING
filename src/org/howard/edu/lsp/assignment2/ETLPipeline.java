@@ -59,6 +59,22 @@ public class ETLPipeline {
 
 		List<String[]> transformed = new ArrayList<>();
 		// Transform
+		if (records.isEmpty()) {
+			// Header-only input: write only the header to output
+			try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(outputPath))) {
+				bw.write("ProductID,Name,Price,Category,PriceRange");
+				bw.newLine();
+			} catch (IOException e) {
+				System.err.println("Error writing output file: " + e.getMessage());
+			}
+			System.out.println("Input file contains only the header row. Output file contains only the header row.");
+			System.out.println("ETL Run Summary:");
+			System.out.println("Rows read: 0");
+			System.out.println("Rows transformed: 0");
+			System.out.println("Rows skipped: 0");
+			System.out.println("Output file: " + outputPath);
+			return;
+		}
 		for (String[] rec : records) {
 			// ...existing code...
 			String productId = rec[0].trim();
