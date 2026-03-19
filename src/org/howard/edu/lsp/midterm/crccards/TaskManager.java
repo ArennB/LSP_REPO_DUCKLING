@@ -1,0 +1,55 @@
+package org.howard.edu.lsp.midterm.crccards;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Manages a collection of Task objects. Supports adding tasks, finding by ID,
+ * and retrieving tasks by status. Prevents duplicate task IDs.
+ *
+ * @author arenn
+ */
+public class TaskManager {
+    private final Map<String, Task> tasks = new LinkedHashMap<>();
+
+    /**
+     * Adds a new task to the manager.
+     *
+     * @param task the task to add
+     * @throws IllegalArgumentException if a task with the same ID already exists
+     */
+    public void addTask(Task task) {
+        if (tasks.containsKey(task.getTaskId())) {
+            throw new IllegalArgumentException("Duplicate task ID: " + task.getTaskId());
+        }
+        tasks.put(task.getTaskId(), task);
+    }
+
+    /**
+     * Finds a task by its ID.
+     *
+     * @param taskId the task ID to search for
+     * @return the task if found, or null if not found
+     */
+    public Task findTask(String taskId) {
+        return tasks.get(taskId);
+    }
+
+    /**
+     * Returns all tasks whose status matches the specified value.
+     *
+     * @param status the status to match
+     * @return a list of matching tasks
+     */
+    public List<Task> getTasksByStatus(String status) {
+        List<Task> result = new ArrayList<>();
+        for (Task task : tasks.values()) {
+            if (task.getStatus().equals(status)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+}
